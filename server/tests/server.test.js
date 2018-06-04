@@ -4,6 +4,7 @@ const request = require('supertest');
 const {app} = require('./../server');
 const {Todo} = require('./../models/todo');
 
+//corre antes de cada test case e apaga todos os elementos na BD Todo
 beforeEach((done) => {
     Todo.remove({}).then(() => {
         done();
@@ -34,6 +35,7 @@ describe('POST /todos', () => {
             });
     });
 
+    //testa se os modelos estao a ser postos em accao e nao deixam guardar mensagens em branco
     it('should not create a todo with invalid body data', (done) => {
 
         request(app)
